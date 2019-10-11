@@ -27,3 +27,5 @@ if __name__ == "__main__":
     target = 6
     res = two_sum(arr, target)
     print(res)
+
+#i need to stop doing this
