@@ -50,3 +50,34 @@ r.push(exampleTask) // run
 r.push(exampleTask) // wait
 r.run();
 ```
+### Python 
+``` python
+import time
+
+def example_task(done):
+    time.sleep(2)
+    done()
+
+class Runner:
+    def __init__(self, num):
+        self.max_num = num
+        self.counter = 0
+        self.queue = []
+
+    def push(self, callback_fn):
+        self.queue.append(callback_fn)
+
+    def run(self):
+        if self.queue and self.counter < self.max_num:
+            self.counter += 1
+            task = self.queue.pop(0)
+            done = lambda: self.counter -= 1 and self.run() and print(f'number at this moment: {self.counter}')
+            task(done)
+
+r = Runner(3)
+r.push(example_task) # run
+r.push(example_task) # run
+r.push(example_task) # run
+r.push(example_task) # wait
+r.run()
+```
